@@ -2,6 +2,10 @@
 
 ### home_weather
 
+Purpose
+
+> Tracking humidity, temperature and ambient light parameters.
+
 Components
 
  *  Urduino UNO
