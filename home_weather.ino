@@ -17,6 +17,8 @@ DHT22 myDHT22(DHT22_PIN);
 LiquidCrystal_SR3W lcd(2, 3, 4);
 int LDRReading;
 DHT22_ERROR_t errorCode;
+int lightSensorMin = 1023; 
+int lightSensorMax = 0;    
 
 void welcomeScreen()
 {
@@ -84,7 +86,8 @@ void printMeasurements(void)
 void doMeasurements(void)
 {
   errorCode = myDHT22.readData();
-  LDRReading = analogRead(LDR_PIN);
+  LDRReading = map(analogRead(LDR_PIN), lightSensorMin, lightSensorMax, 255, 0);
+  LDRReading = constrain(LDRReading, 0, 255);
   switch(errorCode)
   {
     case DHT_ERROR_NONE:
@@ -121,7 +124,6 @@ void doMeasurements(void)
       break;
   }
 }
-
 
 void loop(void)
 {   
